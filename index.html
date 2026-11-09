@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ميراد | الأعشاب الطبيعية الفاخرة للعناية بالشعر والبشرة</title>
+  <meta name="description" content="متجر ميراد للأعشاب الطبيعية الفاخرة: سدر، حناء أسواني، مشاط، خلطة جذور، وأحجار جواشا — شحن لكل المحافظات ودفع عند الاستلام.">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header class="site-header">
+    <div class="header-in">
+      <a href="index.html" class="logo">
+        <img src="images/logo.svg" alt="لوجو ميراد">
+        <div>ميراد<small>Mirad · الأعشاب الطبيعية</small></div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="active">الرئيسية</a>
+        <a href="shop.html">المنتجات</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">تواصل معنا</a>
+      </nav>
+      <div class="header-actions">
+        <a href="cart.html" class="cart-btn" title="سلة المشتريات">🛒<span class="cart-count" id="cartCount">0</span></a>
+        <button class="menu-btn" onclick="toggleMenu()" aria-label="القائمة">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- الهيرو -->
+  <section class="hero">
+    <div class="hero-in">
+      <div>
+        <span class="eyebrow">✦ متجر ميراد للأعشاب الطبيعية</span>
+        <h1>جمالك الطبيعي..<br>يبدأ من <span>جذور الأعشاب</span></h1>
+        <p class="lead">تركيبات عشبية مصرية فاخرة للعناية بالشعر والبشرة — بنوصلها لباب بيتك في كل المحافظات، والدفع كاش عند الاستلام.</p>
+        <div class="hero-cta">
+          <a href="shop.html" class="btn">🛍️ تسوق الآن</a>
+          <a href="https://wa.me/201107125799" target="_blank" class="btn btn-outline">استفسار واتساب</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>9+</b><span>منتجات فاخرة</span></div>
+          <div><b>100%</b><span>مكونات طبيعية</span></div>
+          <div><b>27</b><span>محافظة بنشحن ليها</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="images/sidr.jpg" alt="عشبة السدر المصري الفاخر - ميراد">
+        <div class="hero-card">🌿 نظيف · طبيعي · فاخر</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- شريط المميزات -->
+  <section class="features">
+    <div class="features-in">
+      <div class="feature"><span class="fi">🚚</span> شحن لجميع المحافظات</div>
+      <div class="feature"><span class="fi">💵</span> الدفع عند الاستلام</div>
+      <div class="feature"><span class="fi">🔄</span> استبدال خلال 14 يوم</div>
+      <div class="feature"><span class="fi">🌿</span> منتجات طبيعية 100%</div>
+    </div>
+  </section>
+
+  <!-- المنتجات المميزة -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">✦ الأشهر عند زبايننا</span>
+        <h2>منتجات مختارة بحب 🌿</h2>
+        <p>أكثر التركيبات طلباً من زباين ميراد — هرموني ونقية وخامة عالية الجودة، وكلها نتيجتها واضحة من أول استخدام.</p>
+      </div>
+      <div class="p-grid" id="featured"></div>
+      <div style="text-align:center;margin-top:34px">
+        <a href="shop.html" class="btn btn-outline">تصفح جميع المنتجات ←</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- بانر -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="banner">
+        <h2>شحن مجاني للأوردرات فوق 1000 ج.م 🚚</h2>
+        <p>اطلب دلوقتي وهنوصلك لباب بيتك في أي محافظة — والشحن علينا.</p>
+        <a href="shop.html" class="btn">ابدأ التسوق</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- آراء الزبائن -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">✦ آراء الزبائن</span>
+        <h2>بيقولوا إيه عن ميراد؟ 💚</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>"خلطة جذور فعلاً غيرت حياتي؛ الفراغات عندي بدأت تنبُّت بعد أسبوعين بس، والنتيجة اللي لاحظتها عجبتني جداً. التغليف برضه فاخر."</p>
+          <div class="who"><span class="av">س</span><div><b>سارة محمد</b><span>مصر الجديدة، القاهرة</span></div></div>
+        </div>
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>"المشاط البني فاجأني تماماً؛ شعري بقى ناعم ومفرد بدون أي مواد كيميائية، بصراحة جربت كتير وقفت عند ميراد."</p>
+          <div class="who"><span class="av">ن</span><div><b>نهى عاشور</b><span>سموحة، الإسكندرية</span></div></div>
+        </div>
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>"الحناء الأسواني نقيّة فعلاً 100%؛ كانت أول تجربة ليا واللون طلع نحاسي جميل والجودة ممتازة. اهتمامهم بالزبون مميز."</p>
+          <div class="who"><span class="av">ا</span><div><b>إيهاب جلال</b><span>المحلة، الغربية</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- من نحن مختصر -->
+  <section class="section" style="padding-top:0">
+    <div class="container about-grid">
+      <img src="images/taj.jpg" alt="تاج الأعشاب الفاخر - ميراد" loading="lazy">
+      <div>
+        <span class="eyebrow" style="color:var(--gold);font-weight:700">✦ من نحن</span>
+        <h2 style="font-size:28px;color:var(--green-dark);margin:8px 0 14px">ميراد.. عشب مصري فاخر 💚</h2>
+        <p>من قلب مصر، جبنالكم أجود الأعشاب والأحجار الطبيعية في تركيبات فاخرة للعناية بالشعر والبشرة — من غير مواد كيميائية ولا إضافات صناعية.</p>
+        <p>كل خلطة عندنا بتتمزج بأيدٍ خبيرة فاضلة، من أحسن أنواع الأعشاب المصرية، مثالية لمن يبحث عن الجمال الطبيعي الحقيقي.</p>
+        <a href="about.html" class="btn btn-ghost" style="margin-top:8px">اقرأ قصتنا</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- الفوتر -->
+  <footer class="site-footer">
+    <div class="container footer-in">
+      <div>
+        <div class="f-logo"><img src="images/logo.svg" alt="ميراد"><span>ميراد · Mirad</span></div>
+        <p>متجرك المتخصص في الأعشاب الطبيعية الفاخرة للعناية بالشعر والبشرة — جودة مصرية تليق بجمالك.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com" target="_blank" title="فيسبوك">f</a>
+          <a href="https://www.instagram.com" target="_blank" title="إنستجرام">◎</a>
+          <a href="https://wa.me/201107125799" target="_blank" title="واتساب">✆</a>
+        </div>
+      </div>
+      <div>
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="shop.html">المنتجات</a></li>
+          <li><a href="about.html">من نحن</a></li>
+          <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>الأقسام</h4>
+        <ul>
+          <li><a href="shop.html">العناية بالشعر</a></li>
+          <li><a href="shop.html">العناية بالبشرة والجسم</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>تواصل معنا</h4>
+        <p>📞 01107125799</p>
+        <p>⏰ يومياً من 10 صباحاً حتى 10 مساءً</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 متجر ميراد — جميع الحقوق محفوظة</div>
+  </footer>
+
+  <!-- واتساب عائم -->
+  <a class="wa-float" href="https://wa.me/201107125799" target="_blank" aria-label="تواصل واتساب">
+    <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff"><path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.5 2.1 7.8L.8 31.2l7.6-2c2.2 1.2 4.8 2 7.6 2 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm7 21.4c-.3.9-1.9 1.8-2.6 1.9-.7.1-1.5.1-2.4-.2-.6-.2-1.3-.4-2.2-.8-3.9-1.7-6.4-5.6-6.6-5.9-.2-.3-1.6-2.1-1.6-4s.9-2.9 1.3-3.3c.4-.4.8-.5 1-.5h.8c.2 0 .5-.1.8.6.3.8 1.2 2.8 1.3 3 .1.2.1.4 0 .7-.2.3-.6.9-1 1.2-.3.2-.6.6-.3 1 .3.3 1.1 1.5 2.4 2.4 1.6 1.2 3 1.5 3.4 1.7.4.2.7.2.9-.1.3-.3 1.1-1.3 1.4-1.7.3-.4.6-.4 1-.2.4.1 2.1 1 2.4 1.2.3.2.5.3.6.4.1.2.1.9-.3 1.8z"/></svg>
+  </a>
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
