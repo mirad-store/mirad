@@ -94,6 +94,30 @@ h1,h2,h3{font-weight:800;line-height:1.35}
 .feature{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--green-dark);font-size:14.5px}
 .feature .fi{font-size:24px;background:var(--green-soft);border-radius:12px;padding:8px 10px}
 
+/* ---------- بيان العلامة (Manifesto) ---------- */
+.manifesto{
+  background:linear-gradient(180deg,#fff 0%,var(--beige) 100%);
+  text-align:center;padding:64px 18px 58px;position:relative;
+  border-top:1px solid #eee;border-bottom:1px solid #eee5;
+}
+.manifesto .leaf{
+  font-size:30px;width:64px;height:64px;display:grid;place-items:center;
+  margin:0 auto 14px;background:var(--green-soft);border-radius:50%;
+}
+.manifesto h2{font-size:27px;color:var(--green-dark);margin-bottom:16px}
+.manifesto p{
+  max-width:700px;margin:0 auto;color:var(--muted);
+  font-size:17px;line-height:2.1;
+}
+.manifesto .rule{
+  width:72px;height:3px;background:var(--gold);border-radius:99px;margin-top:26px;
+}
+@media (max-width:760px){
+  .manifesto{padding:46px 18px 40px}
+  .manifesto h2{font-size:22px}
+  .manifesto p{font-size:15.5px}
+}
+
 /* ---------- المنتجات ---------- */
 .p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
 .p-card{
