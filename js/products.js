@@ -28,6 +28,12 @@ const CATEGORIES = [
   { id: "body", name: "العناية بالبشرة والجسم" },
 ];
 
+/* 💳 بيانات التحويل — 🛑 ضع أرقامك الحقيقية هنا */
+const PAYMENT = {
+  vodafoneCash: "01107125799", // TODO: رقم فودافون كاش الحقيقي
+  instaPay: "",                // TODO: عنوان/رقم إنستا باي (سيبه فاضي يختفي تلقائياً)
+};
+
 const PRODUCTS = [
   {
     id: "jodour",

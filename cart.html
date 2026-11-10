@@ -49,31 +49,81 @@
       <!-- بيانات الشحن -->
       <form class="form" onsubmit="checkoutWA(event)" id="checkoutForm" style="display:none">
         <h3>📋 بيانات الشحن</h3>
+
         <div class="field">
           <label for="fName">الاسم بالكامل *</label>
-          <input id="fName" type="text" placeholder="مثال: أحمد محمود" required>
+          <input id="fName" type="text" placeholder="مثال: أحمد محمود عبد العال" required>
         </div>
+
         <div class="field">
-          <label for="fPhone">رقم الهاتف *</label>
-          <input id="fPhone" type="tel" placeholder="01xxxxxxxxx" required>
+          <label for="fPhone">رقم الواتساب للمتابعة *</label>
+          <input id="fPhone" type="tel" placeholder="01xxxxxxxxx (11 رقم)" required>
         </div>
+
         <div class="field">
           <label for="fCity">المحافظة *</label>
           <select id="fCity" required>
             <option value="" disabled selected>اختر محافظتك…</option>
           </select>
         </div>
+
+        <div class="field">
+          <label for="fTown">المدينة / المركز *</label>
+          <input id="fTown" type="text" placeholder="مثال: مدينة نصر أو مركز قنا" required>
+        </div>
+
         <div class="field">
           <label for="fAddress">العنوان بالتفصيل *</label>
-          <input id="fAddress" type="text" placeholder="المنطقة، الشارع، رقم العقار، الدور" required>
+          <input id="fAddress" type="text" placeholder="اسم الشارع / رقم العقار / الدور / الشقة" required>
         </div>
+
+        <div class="field">
+          <label for="fLandmark">علامة مميزة قريبة منك (اختياري)</label>
+          <input id="fLandmark" type="text" placeholder="مثال: بجوار مسجد النور">
+        </div>
+
+        <div class="field">
+          <label class="lbl-block">💳 طريقة الدفع *</label>
+          <label class="pay-opt"><input type="radio" name="pay" value="كاش عند الاستلام" checked>
+            💵 الدفع كاش عند الاستلام (موصى به)</label>
+          <label class="pay-opt"><input type="radio" name="pay" value="تحويل مقدم">
+            📲 تحويل مقدم الشحن (فودافون كاش / إنستا باي)</label>
+        </div>
+
+        <!-- قسم التحويل المقدم -->
+        <div id="transferBox" style="display:none">
+          <div class="pay-note">
+            <div>مقدم الشحن المطلوب تحويله الآن: <b id="payAmount">—</b></div>
+            <ol class="pay-steps">
+              <li>حوّل المبلغ على <b>فودافون كاش: <span dir="ltr">01107125799</span></b>
+                <button type="button" class="copy-btn" onclick="copyNum(this)">📋 نسخ</button>
+                <span id="instaRow" style="display:none"><br>إنستا باي: <b dir="ltr" id="payInsta"></b>
+                <button type="button" class="copy-btn" onclick="copyNum(this)">📋 نسخ</button></span>
+              </li>
+              <li>خد <b>اسكرين شوت</b> لإثبات التحويل 📸</li>
+              <li>اكتب رقم عملية التحويل في الخانة اللي تحت</li>
+              <li>بعد ما يفتح الواتساب: <b>أرفق الصورة في نفس الرسالة قبل ما تبعتها</b> ✅</li>
+            </ol>
+          </div>
+          <div class="field">
+            <label for="fTransferRef">رقم عملية التحويل / آخر 4 أرقام *</label>
+            <input id="fTransferRef" type="text" placeholder="مثال: 4821">
+          </div>
+        </div>
+
         <div class="field">
           <label for="fNotes">ملاحظات (اختياري)</label>
           <textarea id="fNotes" placeholder="أي طلب خاص أو تفاصيل إضافية…"></textarea>
         </div>
-        <button type="submit" class="btn btn-wa" style="width:100%">✅ تأكيد الطلب عبر واتساب</button>
+
+        <label class="agree">
+          <input id="fAgree" type="checkbox" required>
+          ✍️ أؤكد أن البيانات المكتوبة صحيحة وأتحمل مسئولية أثمنة الرجوع في حال اختلفت.
+        </label>
+
+        <button type="submit" class="btn btn-wa" style="width:100%;margin-top:12px">✅ تأكيد الطلب عبر واتساب</button>
         <p style="font-size:13px;color:var(--muted);margin-top:10px;text-align:center">
-          هينفتح واتساب برسالة جاهزة فيها كل تفاصيل أوردر — ابعتها وهنأكدلك التفاصيل هناك 💚
+          هينفتح واتساب برسالة جاهزة فيها كل تفاصيل أوردر — أرسلها وهنأكدلك التفاصيل هناك 💚
         </p>
       </form>
     </div>

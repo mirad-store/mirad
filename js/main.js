@@ -31,10 +31,28 @@ function cartTotal()  { return getCart().reduce((s, i) => s + i.price * i.qty, 0
 
 function updateCartBadge() {
   const el = document.getElementById("cartCount");
-  if (!el) return;
+  if (el) {
+    const n = cartCount();
+    el.textContent = n;
+    el.classList.toggle("show", n > 0);
+  }
+  refreshCartReminder();
+}
+
+/* ---------- تنبيه سلة مش متبعتة (كل الصفحات) ---------- */
+function refreshCartReminder() {
+  const onCart = location.pathname.includes("cart");
   const n = cartCount();
-  el.textContent = n;
-  el.classList.toggle("show", n > 0);
+  let el = document.getElementById("cart-reminder");
+  if (!n || onCart) { if (el) el.remove(); return; }
+  if (!el) {
+    el = document.createElement("a");
+    el.id = "cart-reminder";
+    el.href = "cart.html";
+    document.body.appendChild(el);
+  }
+  el.innerHTML = `🛒 عندك <b>${n} ${n === 1 ? "منتج" : "منتجات"}</b> في سلتك — لسه مبعتليش الأوردر! 👈` +
+    `<span class="rm-cta">أكمل الطلب</span>`;
 }
 
 function addToCart(id, size, price, qty = 1) {
@@ -255,6 +273,7 @@ function renderCartPage() {
 
   const form = document.getElementById("checkoutForm");
   if (form) form.style.display = "block";
+  updatePayAmount();
 }
 
 function checkoutWA(ev) {
@@ -263,12 +282,27 @@ function checkoutWA(ev) {
   if (!cart.length) return toast("سلتك فاضية 🙂");
 
   const name    = document.getElementById("fName").value.trim();
-  const phone   = document.getElementById("fPhone").value.trim();
-  const city    = document.getElementById("fCity").value.trim();
+  const phone   = document.getElementById("fPhone").value.replace(/[\s-]/g, "");
+  const city    = document.getElementById("fCity").value;
+  const town    = document.getElementById("fTown").value.trim();
   const address = document.getElementById("fAddress").value.trim();
+  const landm   = document.getElementById("fLandmark").value.trim();
+  const payChoice = document.querySelector('input[name="pay"]:checked');
+  const pay     = payChoice ? payChoice.value : "كاش عند الاستلام";
+  const ref     = (document.getElementById("fTransferRef")?.value || "").trim();
   const notes   = document.getElementById("fNotes").value.trim();
+  const agreed  = document.getElementById("fAgree").checked;
 
-  if (!name || !phone || !city || !address) return toast("من فضلك اكمل بيانات الشحن 🙏");
+  /* التحقق من البيانات */
+  document.querySelectorAll("#checkoutForm .bad").forEach(e => e.classList.remove("bad"));
+  const mark = id => { const e = document.getElementById(id); if (e) e.classList.add("bad"); return e; };
+  if (!name)  return toast("اكتب اسمك بالكامل 🙏") || mark("fName");
+  if (!/^01\d{9}$/.test(phone)) { mark("fPhone"); return toast("رقم الموبايل غير صحيح — 11 رقم يبدأ بـ 01"); }
+  if (!city)  return toast("اختر محافظتك 🙏");
+  if (!town)  return toast("اكتب المدينة / المركز 🙏") || mark("fTown");
+  if (!address) return toast("اكتب عنوانك بالتفصيل 🙏") || mark("fAddress");
+  if (pay === "تحويل مقدم" && !ref) { mark("fTransferRef"); return toast("اكتب رقم عملية التحويل بعد ما تعمل التحويل 💳"); }
+  if (!agreed) return toast("اعلم على مربع تأكيد صحة البيانات ✍️");
 
   const total = cartTotal();
   const free  = SHIPPING.freeOver > 0 && total >= SHIPPING.freeOver;
@@ -283,20 +317,60 @@ function checkoutWA(ev) {
       +  `الشحن: ${ship === 0 ? "مجاني 🎉" : money(ship)}\n`
       +  `*الإجمالي: ${money(total + ship)}*\n`
       +  `━━━━━━━━━\n`
-      +  `👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🏙️ المحافظة: ${city}\n📍 العنوان: ${address}\n`
-      +  (notes ? `📝 ملاحظات: ${notes}\n` : "");
+      +  `💳 الدفع: ${pay}\n`;
+  if (pay === "تحويل مقدم") {
+    msg += `   مقدم الشحن: ${money(ship)}\n   رقم العملية: ${ref}\n`;
+  }
+  msg += `━━━━━━━━━\n`
+      +  `👤 الاسم: ${name}\n`
+      +  `📞 الواتساب: ${phone}\n`
+      +  `🏙️ المحافظة: ${city}\n`
+      +  `🏢 المدينة/المركز: ${town}\n`
+      +  `📍 العنوان: ${address}\n`
+      +  (landm ? `🧭 علامة مميزة: ${landm}\n` : ``)
+      +  (notes ? `📝 ملاحظات: ${notes}\n` : ``);
+  if (pay === "تحويل مقدم") {
+    msg += `━━━━━━━━━\n📸 المطلوب قبل الشحن: أرفق سكرين شوت إثبات تحويل ${money(ship)} في نفس الرسالة دي.`;
+  }
 
   window.open(waLink(msg), "_blank");
-  toast("جارِ فتح واتساب… أرسل الرسالة لتأكيد الطلب ✅");
+  toast(pay === "تحويل مقدم"
+    ? "جارِ فتح واتساب… ارفق سكرين شوت التحويل في نفس الرسالة 📸"
+    : "جارِ فتح واتساب… أرسل الرسالة لتأكيد الطلب ✅");
+}
+
+function copyNum(btn) {
+  const num = btn.previousElementSibling ? btn.previousElementSibling.textContent : "";
+  navigator.clipboard?.writeText(num);
+  toast("تم نسخ الرقم ✅");
+}
+
+/* إظهار/إخفاء قسم التحويل + تحديث مقدم الشحن */
+function toggleTransferBox() {
+  const checked = document.querySelector('input[name="pay"]:checked');
+  const box = document.getElementById("transferBox");
+  if (box && checked) box.style.display = checked.value === "تحويل مقدم" ? "block" : "none";
+  updatePayAmount();
+}
+
+function updatePayAmount() {
+  const el = document.getElementById("payAmount");
+  if (!el) return;
+  const city = document.getElementById("fCity") ? document.getElementById("fCity").value : "";
+  const total = cartTotal();
+  el.textContent = money(shippingFor(city, total));
+  const insta = document.getElementById("instaRow");
+  if (insta) insta.style.display = PAYMENT.instaPay ? "inline" : "none";
 }
 
 /* ---------- قائمة المحافظات (صفحة السلة) ---------- */
 function populateCities() {
   const sel = document.getElementById("fCity");
-  if (!sel || sel.options.length) return;
+  if (!sel || sel.dataset.filled === "1") return;
   sel.innerHTML =
     `<option value="" disabled selected>اختر محافظتك…</option>` +
     GOVERNORATES.map(c => `<option value="${c}">${c}</option>`).join("");
+  sel.dataset.filled = "1";
   sel.addEventListener("change", () => {
     if (location.pathname.includes("cart")) renderCartPage();
   });
@@ -324,6 +398,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (location.pathname.includes("cart")) {
     populateCities();
     renderCartPage();
+    document.querySelectorAll('input[name="pay"]').forEach(r =>
+      r.addEventListener("change", toggleTransferBox));
+    toggleTransferBox();
   }
   renderProducts("#featured", p => p.featured, 8);
   renderProducts("#shopGrid");
