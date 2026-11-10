@@ -20,7 +20,7 @@ const GOVERNORATES = [
 
 function shippingFor(city, subtotal) {
   if (SHIPPING.freeOver > 0 && subtotal >= SHIPPING.freeOver) return 0;
-  return city === "القليوبية" ? SHIPPING.qalyubia : SHIPPING.cost;
+  return SHIPPING_PRICES[city] ?? SHIPPING.fallback;
 }
 
 /* ---------- السلة (localStorage) ---------- */
@@ -183,7 +183,7 @@ function renderProductPage() {
         <button class="btn btn-wa" onclick="detailBuy('${p.id}')">طلب مباشر عبر واتساب</button>
       </div>
       <div class="trust-mini">
-        ✅ دفع عند الاستلام &nbsp;·&nbsp; 🚚 شحن 100 ج.م (القليوبية 60 ج.م) &nbsp;·&nbsp; 🔄 استرجاع خلال 14 يوم
+        ✅ دفع عند الاستلام &nbsp;·&nbsp; 🚚 شحن يبدأ من 50 ج.م حسب محافظتك &nbsp;·&nbsp; 🔄 استرجاع خلال 14 يوم
       </div>
     </div>`;
   if (p.variants) {
