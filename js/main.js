@@ -9,6 +9,20 @@ const minPrice    = p => p.variants ? Math.min(...p.variants.map(v => v.price)) 
 const maxPrice    = p => p.variants ? Math.max(...p.variants.map(v => v.price)) : p.price;
 const waLink      = txt => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(txt)}`;
 
+/* ---------- المحافظات والشحن ---------- */
+const GOVERNORATES = [
+  "القليوبية", "القاهرة", "الجيزة", "الإسكندرية",
+  "الشرقية", "الدقهلية", "الغربية", "المنوفية", "البحيرة", "كفر الشيخ",
+  "دمياط", "بورسعيد", "الإسماعيلية", "السويس", "الفيوم", "بنى سويف",
+  "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر", "الأسوان",
+  "البحر الأحمر", "مطروح", "شمال سيناء", "جنوب سيناء", "الوادي الجديد",
+];
+
+function shippingFor(city, subtotal) {
+  if (SHIPPING.freeOver > 0 && subtotal >= SHIPPING.freeOver) return 0;
+  return city === "القليوبية" ? SHIPPING.qalyubia : SHIPPING.cost;
+}
+
 /* ---------- السلة (localStorage) ---------- */
 function getCart()    { try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { return []; } }
 function saveCart(c)  { localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCartBadge(); }
@@ -151,7 +165,7 @@ function renderProductPage() {
         <button class="btn btn-wa" onclick="detailBuy('${p.id}')">طلب مباشر عبر واتساب</button>
       </div>
       <div class="trust-mini">
-        ✅ دفع عند الاستلام &nbsp;·&nbsp; 🚚 شحن ${SHIPPING.cost} ج.م &nbsp;·&nbsp; 🔄 استرجاع خلال 14 يوم
+        ✅ دفع عند الاستلام &nbsp;·&nbsp; 🚚 شحن 100 ج.م (القليوبية 60 ج.م) &nbsp;·&nbsp; 🔄 استرجاع خلال 14 يوم
       </div>
     </div>`;
   if (p.variants) {
@@ -225,8 +239,9 @@ function renderCartPage() {
   }).join("");
 
   const total = cartTotal();
+  const city  = document.getElementById("fCity") ? document.getElementById("fCity").value : "";
   const free  = SHIPPING.freeOver > 0 && total >= SHIPPING.freeOver;
-  const ship  = SHIPPING.freeOver > 0 && total < SHIPPING.freeOver ? SHIPPING.cost : (SHIPPING.freeOver ? 0 : SHIPPING.cost);
+  const ship  = shippingFor(city, total);
   const freeNote = SHIPPING.freeOver > 0
     ? (free ? `<div class="free-note">🎉 مبروك! شحنك مجاني</div>`
             : `<div class="free-note">أضف ${money(SHIPPING.freeOver - total)} المزيد واحصل على شحن مجاني 🚚</div>`)
@@ -257,7 +272,7 @@ function checkoutWA(ev) {
 
   const total = cartTotal();
   const free  = SHIPPING.freeOver > 0 && total >= SHIPPING.freeOver;
-  const ship  = SHIPPING.freeOver > 0 && total < SHIPPING.freeOver ? SHIPPING.cost : (SHIPPING.freeOver ? 0 : SHIPPING.cost);
+  const ship  = shippingFor(city, total);
 
   let msg = `🌿 طلب جديد — متجر ميراد\n━━━━━━━━━\n`;
   cart.forEach((i, n) => {
@@ -273,6 +288,18 @@ function checkoutWA(ev) {
 
   window.open(waLink(msg), "_blank");
   toast("جارِ فتح واتساب… أرسل الرسالة لتأكيد الطلب ✅");
+}
+
+/* ---------- قائمة المحافظات (صفحة السلة) ---------- */
+function populateCities() {
+  const sel = document.getElementById("fCity");
+  if (!sel || sel.options.length) return;
+  sel.innerHTML =
+    `<option value="" disabled selected>اختر محافظتك…</option>` +
+    GOVERNORATES.map(c => `<option value="${c}">${c}</option>`).join("");
+  sel.addEventListener("change", () => {
+    if (location.pathname.includes("cart")) renderCartPage();
+  });
 }
 
 /* ---------- نموذج تواصل → واتساب ---------- */
@@ -294,7 +321,10 @@ function toggleMenu() {
 document.addEventListener("DOMContentLoaded", () => {
   updateCartBadge();
   renderProductPage();
-  if (location.pathname.includes("cart")) renderCartPage();
+  if (location.pathname.includes("cart")) {
+    populateCities();
+    renderCartPage();
+  }
   renderProducts("#featured", p => p.featured, 8);
   renderProducts("#shopGrid");
 });
