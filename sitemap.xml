@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://mirad-store.github.io/mirad/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/shop.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/contact.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/jodour.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/jodour.jpg</image:loc></image:image><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/joasha.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/joasha.jpg</image:loc></image:image><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/sidr.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/sidr.jpg</image:loc></image:image><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/mashat-brown.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/mashat-brown.jpg</image:loc></image:image><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/henna.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/henna.jpg</image:loc></image:image><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/zait.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/zait.jpg</image:loc></image:image><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/mashat-green.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/mashat-green.jpg</image:loc></image:image><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/taj.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/taj.jpg</image:loc></image:image><priority>0.9</priority></url>
+  <url><loc>https://mirad-store.github.io/mirad/products/sigala.html</loc><image:image><image:loc>https://mirad-store.github.io/mirad/images/sigala.jpg</image:loc></image:image><priority>0.9</priority></url>
+</urlset>

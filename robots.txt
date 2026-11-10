@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mirad-store.github.io/mirad/sitemap.xml

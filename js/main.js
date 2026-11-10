@@ -8,6 +8,7 @@ const getProduct  = id => PRODUCTS.find(p => p.id === id);
 const minPrice    = p => p.variants ? Math.min(...p.variants.map(v => v.price)) : p.price;
 const maxPrice    = p => p.variants ? Math.max(...p.variants.map(v => v.price)) : p.price;
 const waLink      = txt => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(txt)}`;
+const ROOT        = location.pathname.includes("/products/") ? "../" : "";
 
 /* ---------- المحافظات والشحن ---------- */
 const GOVERNORATES = [
@@ -48,7 +49,7 @@ function refreshCartReminder() {
   if (!el) {
     el = document.createElement("a");
     el.id = "cart-reminder";
-    el.href = "cart.html";
+    el.href = ROOT + "cart.html";
     document.body.appendChild(el);
   }
   el.innerHTML = `🛒 عندك <b>${n} ${n === 1 ? "منتج" : "منتجات"}</b> في سلتك — لسه مبعتليش الأوردر! 👈` +
@@ -101,18 +102,18 @@ function productCard(p) {
   const priceTxt = p.variants ? `يبدأ من ${money(minPrice(p))}` : money(p.price);
   return `
   <article class="p-card">
-    <a href="product.html?id=${p.id}" class="p-img">
+    <a href="${ROOT}product.html?id=${p.id}" class="p-img">
       ${badge}
       <img src="${p.image}" alt="${p.name}" loading="lazy">
     </a>
     <div class="p-body">
       <span class="p-cat">${catName(p.cat)}</span>
-      <h3><a href="product.html?id=${p.id}">${p.name}</a></h3>
+      <h3><a href="${ROOT}product.html?id=${p.id}">${p.name}</a></h3>
       <p class="p-desc">${p.desc.length > 78 ? p.desc.slice(0, 78) + "…" : p.desc}</p>
       <div class="p-foot">
         <div class="p-price">${priceTxt} ${old}</div>
         <div class="p-actions">
-          <a class="icon-link" href="product.html?id=${p.id}" title="تفاصيل">👁</a>
+          <a class="icon-link" href="${ROOT}product.html?id=${p.id}" title="تفاصيل">👁</a>
           <button class="btn btn-sm" onclick="quickAdd('${p.id}')">+ أضف للسلة</button>
         </div>
       </div>
@@ -147,7 +148,7 @@ function renderProductPage() {
   if (!wrap) return;
   const p = getProduct(new URLSearchParams(location.search).get("id"));
   if (!p) {
-    wrap.innerHTML = `<div class="empty-page"><h2>المنتج غير موجود 😅</h2><a class="btn" href="shop.html">تصفح المنتجات</a></div>`;
+    wrap.innerHTML = `<div class="empty-page"><h2>المنتج غير موجود 😅</h2><a class="btn" href="${ROOT}shop.html">تصفح المنتجات</a></div>`;
     return;
   }
   document.title = `${p.name} | ميراد`;
@@ -229,7 +230,7 @@ function renderCartPage() {
   const cart = getCart();
 
   if (!cart.length) {
-    box.innerHTML = `<div class="empty-page"><p>🛒 سلتك فاضية دلوقتي</p><a class="btn" href="shop.html">ابدأ التسوق</a></div>`;
+    box.innerHTML = `<div class="empty-page"><p>🛒 سلتك فاضية دلوقتي</p><a class="btn" href="${ROOT}shop.html">ابدأ التسوق</a></div>`;
     document.getElementById("cartSummaryBox").innerHTML = "";
     const f = document.getElementById("checkoutForm");
     if (f) f.style.display = "none";
@@ -242,7 +243,7 @@ function renderCartPage() {
     <div class="cart-item">
       <img src="${p.image}" alt="${p.name}">
       <div class="ci-info">
-        <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
+        <h4><a href="${ROOT}product.html?id=${p.id}">${p.name}</a></h4>
         ${i.size !== "حجم واحد" ? `<span class="ci-size">${i.size}</span>` : ""}
         <div class="ci-price">${money(i.price)}</div>
       </div>
