@@ -184,7 +184,7 @@ function renderProductPage() {
         <button class="btn btn-wa" onclick="detailBuy('${p.id}')">طلب مباشر عبر واتساب</button>
       </div>
       <div class="trust-mini">
-        ✅ دفع عند الاستلام &nbsp;·&nbsp; 🚚 شحن يبدأ من 50 ج.م حسب محافظتك &nbsp;·&nbsp; 🔄 استرجاع خلال 14 يوم
+        🛡️ <b>ضمان الجودة والرضا 100%</b> &nbsp;·&nbsp; ✅ دفع عند الاستلام &nbsp;·&nbsp; 🚚 شحن يبدأ من 50 ج.م حسب محافظتك &nbsp;·&nbsp; 🔄 استرجاع خلال 14 يوم
       </div>
     </div>`;
   if (p.variants) {
