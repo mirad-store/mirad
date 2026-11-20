@@ -19,7 +19,7 @@ const rvComment = document.getElementById("rvComment");
 const rvSubmit  = document.getElementById("rvSubmit");
 const rvMsgEl   = document.getElementById("rvMsg");
 const rvList    = document.getElementById("liveReviews");
-const rvEmpty   = document.getElementById("reviewsEmpty");
+const rvStatic  = document.getElementById("featuredReviews");
 
 let rvBusy = false;
 
@@ -57,10 +57,12 @@ function renderReviews(rows) {
   rvList.textContent = "";
 
   if (!rows.length) {
-    if (rvEmpty) rvEmpty.hidden = false;
+    if (rvStatic) rvStatic.hidden = false;
+    rvList.hidden = true;
     return;
   }
-  if (rvEmpty) rvEmpty.hidden = true;
+  if (rvStatic) rvStatic.hidden = true;
+  rvList.hidden = false;
 
   rows.forEach(function (r) {
     const card = document.createElement("div");
