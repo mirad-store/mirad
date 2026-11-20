@@ -215,7 +215,7 @@ function detailAdd(id) {
 function detailBuy(id) {
   const { p, size, price, qty } = currentDetail(id);
   const msg =
-`🌿 طلب من متجر ميراد
+`طلب من متجر ميراد
 ━━━━━━━━
 • ${p.name}${size !== "حجم واحد" ? ` (${size})` : ""} × ${qty} = ${money(price * qty)}
 ━━━━━━━━
@@ -309,7 +309,7 @@ function checkoutWA(ev) {
   const free  = SHIPPING.freeOver > 0 && total >= SHIPPING.freeOver;
   const ship  = shippingFor(city, total);
 
-  let msg = `🌿 طلب جديد — متجر ميراد\n━━━━━━━━━\n`;
+  let msg = `طلب جديد — متجر ميراد\n━━━━━━━━━\n`;
   cart.forEach((i, n) => {
     msg += `${n + 1}) ${getProduct(i.id).name}${i.size !== "حجم واحد" ? ` (${i.size})` : ""} × ${i.qty} = ${money(i.price * i.qty)}\n`;
   });
