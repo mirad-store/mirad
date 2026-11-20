@@ -139,12 +139,13 @@
     </div>
   </section>
 
-  <!-- آراء الزبائن -->
-  <section class="section" style="padding-top:0">
+  <!-- آراء وتعليقات العملاء -->
+  <section class="section" style="padding-top:0" id="reviews">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">آراء الزبائن</span>
+        <span class="eyebrow">آراء وتعليقات العملاء</span>
         <h2>بيقولوا إيه عن ميراد؟ 💚</h2>
+        <p>تجارب حقيقية من عملائنا — وشاركينا تجربتك في الأسفل.</p>
       </div>
       <div class="reviews-grid">
         <div class="review">
@@ -162,6 +163,43 @@
           <p>"الحناء الأسواني أول تجربة ليا، وكان اللون نحاسي والجودة أديها 10 من 10، والمتابعة مليووون."</p>
           <div class="who"><span class="av">م</span><div><b>منه إيهاب جلال</b><span>المحلة، الغربية</span></div></div>
         </div>
+      </div>
+
+      <!-- فورم إضافة تعليق -->
+      <div class="review-form-card">
+        <h3>شاركينا تجربتك</h3>
+        <p>اكتبي تعليقك وهنراجعه قبل ما يظهر على الموقع.</p>
+        <form id="reviewForm" novalidate>
+          <div class="rf-row">
+            <div class="field">
+              <label for="rvName">الاسم <span class="req">*</span></label>
+              <input id="rvName" name="name" type="text" maxlength="60" placeholder="اسمك" required>
+            </div>
+            <div class="field">
+              <label for="rvCountry">البلد <small>(اختياري)</small></label>
+              <input id="rvCountry" name="country" type="text" maxlength="60" placeholder="مصر">
+            </div>
+            <div class="field">
+              <label for="rvGov">المحافظة <small>(اختياري)</small></label>
+              <input id="rvGov" name="governorate" type="text" maxlength="60" placeholder="القاهرة">
+            </div>
+          </div>
+          <div class="field">
+            <label for="rvComment">التعليق <span class="req">*</span></label>
+            <textarea id="rvComment" name="comment" rows="4" maxlength="1000" placeholder="اكتبي تجربتك مع منتجات ميراد..." required></textarea>
+          </div>
+          <div class="rf-foot">
+            <button type="submit" class="btn" id="rvSubmit">إرسال التعليق</button>
+            <span class="rf-msg" id="rvMsg" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+      </div>
+
+      <!-- التعليقات المعتمدة من قاعدة البيانات -->
+      <div class="live-reviews">
+        <h3>أحدث التعليقات</h3>
+        <div class="reviews-grid" id="liveReviews" aria-live="polite"></div>
+        <p class="reviews-empty" id="reviewsEmpty">لسه مفيش تعليقات معتمدة — كوني أول واحدة تشاركي تجربتك.</p>
       </div>
     </div>
   </section>
@@ -236,5 +274,6 @@
 
   <script src="js/products.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/reviews.js"></script>
 </body>
 </html>
